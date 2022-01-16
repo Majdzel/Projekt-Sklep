@@ -1,0 +1,31 @@
+body{
+    background-color: #F5F5DC;
+}
+
+.btn{
+    border-radius: 0;
+}
+
+.col{
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  margin:10px;
+}
+.item_box{
+    padding:10px
+}
+
+.cena{
+    font-size:12px;
+}
+
+.table{
+    padding:10px
+}
+
+.row_cart{
+    display: flex;
+}
+
+

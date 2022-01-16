@@ -1,0 +1,66 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+
+        <div class="col">
+
+            <div class="item_box">
+                <form>
+                    <div id="user-data">
+                        <div class="input-group">
+                              <span class="input-group-text">Imię i nazwisko</span>
+                              <input type="text" name="name" aria-label="First name" class="form-control">
+                              <input type="text" name="surname" aria-label="Last name" class="form-control">
+
+                        </div>
+                        <br>
+                        <div class="input-group">
+                              <span class="input-group-text">Email i telefon</span>
+                              <input type="text" name="email" aria-label="E-mail" class="form-control">
+                              <input type="text" name="phone" aria-label="Telefon" class="form-control">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                              <span class="input-group-text">Miasto i kod poczctowy</span>
+                              <input type="text" name="city" aria-label="Miasto" class="form-control">
+                              <input type="text" name="zipcode" aria-label="Kod pocztowy" class="form-control">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                                <span class="input-group-text">Adres</span>
+                                <input type="text" name="address" aria-label="Adres" class="form-control">
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="item_box" id="payment">
+                <a>płatnosc</a>
+                </div>
+                <a class="btn btn-outline-secondary" href="#">Zapłać</a>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="col">
+            <br>
+            <a class="btn btn-secondary" href="{% url 'cart' %}">Cofnijy</a>
+            <div class="item_box">
+                <h1>Zamówienie:</h1>
+                <div class="row_cart">
+                    <div style="flex2"><img src="{% static 'images/card-image.png' %}"></div>
+                    <div style="flex2">Kabel 1</div>
+                    <div style="flex1">X PL</div>
+                    <div style="flex1">Y</div>
+
+                </div>
+                    <h5>Przedmioty: </h5>
+                    <h5>Suma: </h5>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}

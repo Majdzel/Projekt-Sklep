@@ -1,0 +1,42 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="row">
+        <div class="col_cart">
+            <a class="btn btn-secondary" href="{% url 'shop'%}">Kontynuuj zakupy</a>
+            <table class="table">
+                <tr>
+                    <th>Przedmioty: </th>
+                    <th>Cena zamówienia: </th>
+                    <th>
+                    <a class="btn btn-success" href="{% url 'ordering' %}">Do kasy</a>
+                    </th>
+                </tr>
+
+
+            </table>
+        </div>
+        <br>
+
+        <div class="col_cart">
+            <div class="row_cart">
+                <div style="flex:2"></div>
+                <div style="flex:2">Przedmiot</div>
+                <div style="flex:1">Cena</div>
+                <div style="flex:1">Ilość</div>
+                <div style="flex:1">Całkowity koszt</div>
+            </div>
+            <br>
+            <div class="row_cart">
+                <div style="flex:2"><img src="{% static 'images/card-image.png' %}"></div>
+                <div style="flex:2">Kabel 1</div>
+                <div style="flex:1">X PL</div>
+                <div style="flex:1">Y</div>
+                <div style="flex:1">X*Y</div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
