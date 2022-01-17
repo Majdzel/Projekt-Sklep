@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import items
+from .models import *
 
 def itemsList(request):
 
@@ -9,7 +9,8 @@ def itemsList(request):
     return render(request, 'shop/itemsList.html', context)
 
 def shop(request):
-    context = {}
+    allItems = items.objects.all()
+    context = {'allItems': allItems}
     return render(request, 'shop/shop.html', context)
 
 def cart(request):

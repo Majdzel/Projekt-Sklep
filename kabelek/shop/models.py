@@ -7,8 +7,8 @@ from django.urls import reverse
 class items(models.Model):
 
     #GROSZE!!
-    price = models.IntegerField(default=0)
     name = models.CharField(max_length=30)
+    price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
 
 
