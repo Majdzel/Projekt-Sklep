@@ -2,45 +2,18 @@
 {% load static %}
 {% block content %}
     <div class="row">
+
+        {% for items in allItems %}
         <div class="col">
             <img src="{% static 'images/card-image.png' %}">
             <div class="item_box">
-                <h1>nazwa</h1>
+                <h1>{{items.name}}</h1>
                 <button type="button" class="btn btn-outline-success">Dodaj do koszyka</button>
                 <a class="btn btn-outline-secondary" href="#">Zobacz</a>
-                <h2 class="cena" style="float: right">cena</h2>
+                <h2 class="cena" style="float: right">${{items.price|floatformat:2}}</h2>
             </div>
         </div>
-
-        <div class="col">
-            <img src="{% static 'images/card-image.png' %}">
-            <div class="item_box">
-                <h1>nazwa</h1>
-                <button type="button" class="btn btn-outline-success">Dodaj do koszyka</button>
-                <a class="btn btn-outline-secondary" href="#">Zobacz</a>
-                <h2 class="cena" style="float: right">cena</h2>
-            </div>
-        </div>
-
-        <div class="col">
-            <img src="{% static 'images/card-image.png' %}">
-            <div class="item_box">
-                <h1>nazwa</h1>
-                <button type="button" class="btn btn-outline-success">Dodaj do koszyka</button>
-                <a class="btn btn-outline-secondary" href="#">Zobacz</a>
-                <h2 class="cena" style="float: right">cena</h2>
-            </div>
-
-        </div>
-
-        <div class="col">
-            <img src="{% static 'images/card-image.png' %}">
-            <div class="item_box">
-                <h1>nazwa</h1>
-                <button type="button" class="btn btn-outline-success">Dodaj do koszyka</button>
-                <a class="btn btn-outline-secondary" href="#">Zobacz</a>
-                <h2 class="cena" style="float: right">cena</h2>
-            </div>
+        {% endfor %}
 
         </div>
 
