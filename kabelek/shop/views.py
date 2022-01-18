@@ -14,7 +14,13 @@ def shop(request):
     return render(request, 'shop/shop.html', context)
 
 def cart(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        product = order.orderitem_set.all()
+    else:
+        product = []
+    context = {'items': product}
     return render(request, 'shop/cart.html', context)
 
 def ordering(request):
