@@ -8,8 +8,8 @@
             <a class="btn btn-secondary" href="{% url 'shop'%}">Kontynuuj zakupy</a>
             <table class="table">
                 <tr>
-                    <th>Przedmioty: </th>
-                    <th>Cena zamówienia: </th>
+                    <th>Przedmioty: {{order.get_cart_items}}</th>
+                    <th>Cena zamówienia: ${{order.get_cart_total}}</th>
                     <th>
                     <a class="btn btn-success" href="{% url 'ordering' %}">Do kasy</a>
                     </th>
@@ -44,9 +44,13 @@
             <div class="row_cart">
                 <div style="flex:2"><img class=""row-image src="{{item.product.imageURL}}"></div>
                 <div style="flex:2">{{item.product.name}}</div>
-                <div style="flex:1">X PL</div>
-                <div style="flex:1">Y</div>
-                <div style="flex:1">X*Y</div>
+                <div style="flex:1">${{item.product.price|floatformat:2}}</div>
+                <div style="flex:1">
+                    <p class"quantity">
+                    <img class="shg-quantity" src="{%static 'images/arrow-up.png'   %}">
+                    <img class="shg-quantity" src="{%static 'images/arrow-down.png'   %}">
+                </div>
+                <div style="flex:1">${{item.get_total}}</div>
             </div>
             {% endfor %}    -->
 
