@@ -10,7 +10,7 @@ class items(models.Model):
     name = models.CharField(max_length=30)
     price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
-
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
@@ -26,6 +26,14 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)

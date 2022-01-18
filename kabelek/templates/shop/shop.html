@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
     <div class="row">
-
         {% for items in allItems %}
         <div class="col">
+
             <img src="{% static 'images/card-image.png' %}">
             <div class="item_box">
                 <h1>{{items.name}}</h1>
@@ -14,7 +14,6 @@
             </div>
         </div>
         {% endfor %}
-
         </div>
 
 
