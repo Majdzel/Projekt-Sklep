@@ -5,7 +5,7 @@
         {% for items in allItems %}
         <div class="col">
 
-            <img src="{% static 'images/card-image.png' %}">
+            <img class = "thumbnail" src="{{items.imageURL}}">
             <div class="item_box">
                 <h1>{{items.name}}</h1>
                 <button type="button" class="btn btn-outline-success">Dodaj do koszyka</button>
