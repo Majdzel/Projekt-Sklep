@@ -8,7 +8,7 @@
             <img class = "thumbnail" src="{{items.imageURL}}">
             <div class="item_box">
                 <h1>{{items.name}}</h1>
-                <button type="button" class="btn btn-outline-success">Dodaj do koszyka</button>
+                <button data-item={{items.id}} data-action="add" type="button" class="btn btn-outline-success update-cart">Dodaj do koszyka</button>
                 <a class="btn btn-outline-secondary" href="#">Zobacz</a>
                 <h2 class="cena" style="float: right">{{items.price|floatformat:2}} PLN</h2>
             </div>

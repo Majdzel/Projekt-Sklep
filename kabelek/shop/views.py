@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+import json
 from .models import *
+
 
 def itemsList(request):
 
@@ -8,10 +11,12 @@ def itemsList(request):
 
     return render(request, 'shop/itemsList.html', context)
 
+
 def shop(request):
     allItems = items.objects.all()
     context = {'allItems': allItems}
     return render(request, 'shop/shop.html', context)
+
 
 def cart(request):
     if request.user.is_authenticated:
@@ -25,6 +30,7 @@ def cart(request):
     context = {'items': items, 'order': order}
     return render(request, 'shop/cart.html', context)
 
+
 def ordering(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -36,4 +42,12 @@ def ordering(request):
 
     context = {'items': items, 'order': order}
     return render(request, 'shop/ordering.html', context)
-# Create your views here.
+
+
+def updateItem(request):
+    data =json.loads(request.body)
+    itemId = data['itemId']
+    action = data['action']
+    print(action)
+    print(itemId)
+    return JsonResponse('Przedmiot zostal dodany', safe=False)

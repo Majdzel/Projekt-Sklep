@@ -6,17 +6,13 @@ from django.urls import reverse
 
 class items(models.Model):
 
-    #GROSZE!!
     name = models.CharField(max_length=30, default='')
-    price = models.IntegerField(default=0)
+    price = models.IntegerField()
     quantity = models.IntegerField(default=0)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
-
-    def convertGRtoZL(self):
-        return self.price/100
 
     def imageURL(self):
         try:
@@ -41,6 +37,7 @@ class Customer(models.Model):
         except:
             url = ''
         return url
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
