@@ -31,7 +31,7 @@ def cart(request):
     return render(request, 'shop/cart.html', context)
 
 
-def ordering(request):
+def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
