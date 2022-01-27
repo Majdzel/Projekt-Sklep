@@ -2,15 +2,15 @@
 {% load static %}
 {% block content %}
     <div class="row">
-        {% for items in allItems %}
+        {% for item in allItems %}
         <div class="col">
 
-            <img class = "thumbnail" src="{{items.imageURL}}">
+            <img class = "thumbnail" src="{{item.imageURL}}">
             <div class="item_box">
-                <h1>{{items.name}}</h1>
-                <button data-item={{items.id}} data-action="add" type="button" class="btn btn-outline-success update-cart">Dodaj do koszyka</button>
+                <h1>{{item.name}}</h1>
+                <button data-item='{{item.id}}' data-action="add" type="button" class="btn btn-outline-success update-cart">Dodaj do koszyka</button>
                 <a class="btn btn-outline-secondary" href="#">Zobacz</a>
-                <h2 class="cena" style="float: right">{{items.price|floatformat:2}} PLN</h2>
+                <h2 class="cena" style="float: right">{{item.price|floatformat:2}} PLN</h2>
             </div>
         </div>
         {% endfor %}

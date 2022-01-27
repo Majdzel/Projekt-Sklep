@@ -1,39 +1,60 @@
-let updateBtns = document.getElementsByClassName("update-cart")
+const App = {
 
-for(let i =0 ; i<updateBtns.length; i++){
-    updateBtns[i].addEventListener('click',function(){
-        let itemsId = this.dataset.item
-        let action = this.dataset.action
-        console.log('itemsId:',itemsId,'action',action)
+    init() {
+        let updateBtns = document.getElementsByClassName("update-cart")
 
-        console.log('USER',user)
-        if(user === 'AnonymousUser'){
-            console.log('Nie zalogowany')
-        }else{
-            console.log('Zalogowany i wysła dane')
+        for(let i =0 ; i<updateBtns.length; i++){
+            updateBtns[i].addEventListener('click',function() {
+//                let item = JSON.parse(this.dataset.item);
+//                let action = this.dataset.action
+                console.log(this.dataset.item);
+                App.updateUserOrder(item);
+
+
+//                console.log('USER',user)
+//                if(user === 'AnonymousUser'){
+//                    console.log('Nie zalogowany')
+//                }else{
+//                    console.log('Zalogowany i wysła dane')
+//                }
+            });
+
         }
-    })
+    },
+
+    updateUserOrder(item){
+        let items = window.localStorage.getItem('shoppingCart') || [];
+        items = JSON.parse(items);
+        items.push(item);
+        window.localStorage.setItem('shoppingCart', JSON.stringify(items));
+    },
+
+//    <div class="row_cart">
+//                <div style="flex:2"></div>
+//                <div style="flex:2"><b>Przedmiot:</b></div>
+//                <div style="flex:1"><b>Cena:</b></div>
+//                <div style="flex:1"><b>Ilość:</b></div>
+//                <div style="flex:1"><b>Całkowity koszt:</b></div>
+//            </div>
+
+    createRow() {
+           const row = document.createElement('div');
+           row.classList.add('row_cart');
+
+
+    },
+
+    createCol(index) {
+        const flexGrow = 1 < index ? 1 : 2;
+        return `
+          <div style="flex:${flexGrow};">
+          </div>
+        `;
+    }
+
 }
-function updateUserOrder(itemsId,action){
-    console.log('Zalogowany i wysyla')
 
-    let url = '/update_item/'
+window.addEventListener('load', () => {
+App.init();
+});
 
-    fetch(url, {
-        method:'POST',
-        headers:{
-            'Content-Type':'appgit lication/json'
-        },
-        body:JSON.stringify({"itemsId":itemsId,'action':action})
-    })
-
-    .then((response) => {
-        console.log('Zwraca')
-        return response.json()
-    })
-
-    .then((data) => {
-        console.log('data',data)
-        return response.json()
-    })
-}

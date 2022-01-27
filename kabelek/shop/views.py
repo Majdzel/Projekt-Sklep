@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core import serializers
+
 import json
 from .models import *
 
@@ -14,6 +16,8 @@ def itemsList(request):
 
 def shop(request):
     allItems = items.objects.all()
+
+    serializers.serialize('json',allItems);
     context = {'allItems': allItems}
     return render(request, 'shop/shop.html', context)
 
@@ -31,7 +35,7 @@ def cart(request):
     return render(request, 'shop/cart.html', context)
 
 
-def checkout(request):
+def ordering(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
