@@ -1,39 +1,96 @@
-let updateBtns = document.getElementsByClassName("update-cart")
 
-for(let i =0 ; i<updateBtns.length; i++){
-    updateBtns[i].addEventListener('click',function(){
-        let itemsId = this.dataset.item
-        let action = this.dataset.action
-        console.log('itemsId:',itemsId,'action',action)
+const Cart = {
 
-        console.log('USER',user)
-        if(user === 'AnonymousUser'){
-            console.log('Nie zalogowany')
-        }else{
-            console.log('Zalogowany i wysła dane')
-        }
-    })
-}
-function updateUserOrder(itemsId,action){
-    console.log('Zalogowany i wysyla')
-
-    let url = '/update_item/'
-
-    fetch(url, {
-        method:'POST',
-        headers:{
-            'Content-Type':'appgit lication/json'
+        parseItems: function (){
+                items = JSON.parse(window.localStorage.getItem('items'));
+                items.forEach((item, index) => {
+                        items[index].quantity = parseInt(item.quantity);
+                        items[index].price = parseInt(item.price);
+                })
+                return items;
         },
-        body:JSON.stringify({"itemsId":itemsId,'action':action})
-    })
 
-    .then((response) => {
-        console.log('Zwraca')
-        return response.json()
-    })
+        sum : 0,
+        total_price : 0,
 
-    .then((data) => {
-        console.log('data',data)
-        return response.json()
-    })
+        computeSum : function (){
+                console.log(document.querySelector('#sum'), Cart.sum, Cart.total_price);
+                document.querySelector('#sum').textContent = Cart.sum;   
+                document.querySelector('#total_price').textContent = Cart.total_price;  
+        },
+
+    createRows() {
+        Cart.sum = 0;   
+        Cart.total_price = 0;
+        document.querySelector('.cartItems').innerHTML = '';
+
+                const items = Cart.parseItems();
+
+                let rows = '';
+
+                items.forEach(item => {
+                        Cart.sum += item.quantity;
+                        Cart.total_price += item.price * item.quantity;
+                        rows += Cart.createCol(item);
+                });
+
+                document.querySelector('.cartItems').innerHTML += rows;
+                Cart.addDeleteEvent();
+                Cart.computeSum();
+
+    },
+
+        createCol(item) {
+                return `
+                <div class="row_cart">
+                        <div style="flex:2">
+                                <img src="${item.image}">
+                        </div>
+                        <div style="flex:2">
+                                ${item.name}
+                        </div>
+                        <div style="flex:1">
+                                ${item.price}.00 PLN
+                        </div>
+                        <div style="flex:1">
+                                ${item.quantity}
+                        </div>
+                        <div style="flex:1">
+                                ${item.quantity * item.price}.00 PLN
+                                <button type="button" class="btn-danger delete" data-item-id="${item.id}">usun</button>
+                        </div>
+                        
+                </div>
+
+                `
+        },
+        deleteItem(id) {
+                console.log(id);
+                let items = Cart.parseItems();
+                items.forEach((item, index) => {
+                        if(item.id === id){
+                                items[index].quantity = item.quantity - 1;
+                        }
+                })
+                
+                items = items.filter((item) => {
+                        return item.quantity != 0;
+                })
+
+                window.localStorage.setItem('items', JSON.stringify(items));
+                Cart.createRows();
+        },
+
+        addDeleteEvent(){
+                let updateBtns = document.getElementsByClassName('delete');
+        
+                for(let i = 0 ; i < updateBtns.length; i++){
+                    updateBtns[i].addEventListener('click',function(){
+                    Cart.deleteItem(this.dataset.itemId)
+                    })
+                };
+        },
 }
+
+window.addEventListener('load', Cart.createRows);
+

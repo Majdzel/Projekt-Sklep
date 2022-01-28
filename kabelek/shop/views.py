@@ -41,13 +41,8 @@ def checkout(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0}
 
     context = {'items': items, 'order': order}
-    return render(request, 'shop/ordering.html', context)
+    return render(request, 'shop/checkout.html', context)
 
 
 def updateItem(request):
-    data =json.loads(request.body)
-    itemId = data['itemId']
-    action = data['action']
-    print(action)
-    print(itemId)
     return JsonResponse('Przedmiot zostal dodany', safe=False)
