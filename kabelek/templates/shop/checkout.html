@@ -2,11 +2,10 @@
 {% load static %}
 {% block content %}
     <div class="row">
-
         <div class="col">
-
             <div class="item_box">
-                <form>
+                <form method="post" action="{% url 'ordering_post' %}" >
+                    {% csrf_token %}
                     <div id="user-data">
                         <div class="input-group">
                               <span class="input-group-text">Imię i nazwisko</span>
@@ -32,19 +31,19 @@
                                 <input type="text" name="address" aria-label="Adres" class="form-control">
                         </div>
                     </div>
-                </form>
+
                 <br>
                 <div class="item_box" id="payment">
-                <a>Metoda płatności:</a>
+                <a>
+                    Metoda płatności: Płatność przy odbiorze
+                </a>
                 </div>
                 <hr>
-                <a class="btn btn-outline-secondary" href="#">Zapłać</a>
+                <button id="butt" type="submit" class="btn btn-outline-secondary">Zamów</button>
+                </form>
             </div>
 
-
         </div>
-
-
 
         <div class="col">
             <br>
@@ -52,33 +51,14 @@
             <div class="item_box">
                 <hr>
                 <h1>Podsumowanie zamówienia:</h1>
-                <hr>
-                <div class="row_cart">
-                    <div style="flex:2"></div>
-                    <div style="flex:2"><b>Przedmiot:</b></div>
-                    <div style="flex:1"><b>Cena:</b></div>
-                    <div style="flex:1"><b>Ilość:</b></div>
+                    <div class="cartItems"></div>
                 </div>
-                <br>
-
-                {% for item in items %}
-                <div class="row_cart">
-                    <div style="flex:2"><img src="{{item.product.imageURL}}" width="150" height="150"></div>
-                    <div style="flex:2">{{item.product.name}}</div>
-                    <div style="flex:1">{{item.product.price|floatformat:2}} PLN</div>
-                    <div style="flex:1">
-                        <p class="quantity">{{item.quantity}}</p>
-                        <!---<img class="shg-quantity" src="{%static 'images/arrow-up.png'   %}" width="10" height="10">
-
-                        <img class="shg-quantity" src="{%static 'images/arrow-down.png'   %}" width="10" height="10"> -->
-                    </div>
-                </div>
-                {% endfor %}
                 <hr>
-                    <h5>Przedmioty w koszyku: {{order.get_cart_items}}</h5>
-                    <h5>Łączna kwota: {{order.get_cart_total|floatformat:2}} PLN</h5>
+                    <h5>Przedmioty w koszyku: <span id="sum"></span></h5>
+                    <h5>Łączna kwota: <span id="total_price"></span> PLN</h5>
             </div>
 
         </div>
     </div>
+<script src="{% static 'js/checkout.js' %}" defer></script>
 {% endblock content %}

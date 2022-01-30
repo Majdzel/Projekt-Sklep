@@ -2,7 +2,7 @@
 const Cart = {
 
         parseItems: function (){
-                items = JSON.parse(window.localStorage.getItem('items'));
+                items = JSON.parse(window.localStorage.getItem('items')) || [];
                 items.forEach((item, index) => {
                         items[index].quantity = parseInt(item.quantity);
                         items[index].price = parseInt(item.price);
