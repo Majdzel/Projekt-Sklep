@@ -6,6 +6,7 @@
         <div class="form-group border border-dark">
             <div class="px-3 py-3">
                 <form method="POST" action="" style="border: none;">
+                    {% csrf_token %}
                     {{form}}
                     <button id="butt" type="submit">Zarejestruj</button>
                 </form>
